@@ -6,7 +6,7 @@
 **Execution Instructions - Console App**
 1. Open WPGaming.sln using Visual Sutdio
 2. ConnectFourConsoleApp should have set as start up project. If not, please set this as start up project.
-3. Run the soution.
+3. Rebuild and Run the soution.
 
 **Execution Instructions - Tests**
 1. Open WPGaming.sln using Visual Sutdio
