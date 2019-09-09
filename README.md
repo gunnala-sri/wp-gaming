@@ -1,5 +1,7 @@
 # wp-gaming
 
+I have seperated out the core ConnectFour algorithm in to a seperate project **ConnectFourService**. The idea here is to seperate this one out from front-end. This way we can implement any front end(console app, windows or Web) on top of it and more importantly **ConnectFourService** can be fully testable. I have used front end as console APP - **ConnectFourConsoleApp**. This class contains ConnectFourConsole class to handle all user interaction through command line. **ConnectFourGameTest** project contains all test methods for **ConnectFourService**
+
 **Technologies Used**
 1. .NET Core Console App using **.NET Core 2.1**
 
