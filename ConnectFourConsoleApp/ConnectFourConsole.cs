@@ -175,16 +175,7 @@ namespace ConnectFourConsoleApp
         {
             Console.WriteLine();
             var board = this._connectFour.GetTheCurrentBoard();
-            //for (int row = this._rowCount - 1; row >= 0; row--)
-            //{
-            //    for (int column = 0; column < this._columnCount; column++)
-            //    {
-            //        Console.Write(board[row, column] + "  ");
-            //    }
-            //    Console.WriteLine();
-            //    Console.WriteLine();
-            //}
-            for (int row = 0; row < this._rows; row++)
+            for (int row = this._rows - 1; row >= 0; row--)
             {
                 for (int column = 0; column < this._columns; column++)
                 {
@@ -193,6 +184,15 @@ namespace ConnectFourConsoleApp
                 Console.WriteLine();
                 Console.WriteLine();
             }
+            //for (int row = 0; row < this._rows; row++)
+            //{
+            //    for (int column = 0; column < this._columns; column++)
+            //    {
+            //        Console.Write(board[row, column] + "  ");
+            //    }
+            //    Console.WriteLine();
+            //    Console.WriteLine();
+            //}
         }
 
         private void CheckEscKey()
