@@ -15,6 +15,9 @@ namespace ConnectFourService
 
         public ConnectFour(int rows, int columns)
         {
+            if (rows < 4 || columns < 4)
+                throw new ArgumentException("Invalid rows or columns");
+
             this._rowCount = rows;
             this._columnCount = columns;
 
