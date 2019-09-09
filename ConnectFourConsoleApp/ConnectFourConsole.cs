@@ -1,36 +1,64 @@
 ﻿using ConnectFourService;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConnectFourConsoleApp
 {
+    /// <summary>
+    /// Console class to handle the user interaction for the Game.
+    /// </summary>
     public class ConnectFourConsole
     {
+        /// <summary>
+        /// ConnectFour Service class object 
+        /// </summary>
         private ConnectFour _connectFour;
+
+        /// <summary>
+        /// Number of rows in ConnectFour Board 
+        /// </summary>
         private int _rows;
+
+        /// <summary>
+        /// Number of columns in ConnectFour Board
+        /// </summary>
         private int _columns;
 
 
+        /// <summary>
+        /// Starts the ConnectFour Game
+        /// </summary>
         public void StartGame()
         {
+            // Display welcome message and instructions
             this.DisplayWelcomeInfo();
+
+            // Read board size.
             this.ReadGameInputs();
+
+            // Initialize the ConnectFourService
             this.InitializeGame();
+
+            // Run the game.
             this.Run();
 
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Displays welcome info and instructions
+        /// </summary>
         private void DisplayWelcomeInfo()
         {
             Console.WriteLine("Welcome to Connect Four. Please read the instructions below, before you start.");
-            Console.WriteLine("1. Payed with two people");
-            Console.WriteLine("2. Player 1 Yellow indicated with 'Y' on the board");
-            Console.WriteLine("3. Player 2 Red indicated with 'R'");
+            Console.WriteLine("1. Two players game");
+            Console.WriteLine("2. Player 1 is Yellow and indicated with 'Y' on the board");
+            Console.WriteLine("3. Player 2 is Red and indicated with 'R' on the board");
             Console.WriteLine("-------------------------------GAME STARTS NOW--------------------------------");
         }
 
+        /// <summary>
+        /// Read the bord size - number of rows and columns
+        /// </summary>
         private void ReadGameInputs()
         {
             Console.WriteLine("Please enter number rows. It should be greater than 4");
@@ -57,6 +85,9 @@ namespace ConnectFourConsoleApp
             this._columns = colNumber;
         }
 
+        /// <summary>
+        /// Initializes the ConnectFour service and displays intial board.
+        /// </summary>
         private void InitializeGame()
         {
             this._connectFour = new ConnectFour(this._rows, this._columns);
@@ -67,6 +98,10 @@ namespace ConnectFourConsoleApp
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Runs the Games. 
+        /// Gives turns to each player, checks for win/draw.
+        /// </summary>
         private void Run()
         {
             bool yellowTurn = true;
@@ -75,6 +110,7 @@ namespace ConnectFourConsoleApp
 
             do
             {
+                // give a turn to each individual
                 if (yellowTurn)
                 {
                     Console.WriteLine("\nYellows turn:");
@@ -100,7 +136,7 @@ namespace ConnectFourConsoleApp
                     continue;
                 }
 
-                // if the we can drop in given column
+                // Check if we can drop the checker in given column
                 colNumber--;
                 if (!this._connectFour.CanDrop(colNumber))
                 {
@@ -132,6 +168,9 @@ namespace ConnectFourConsoleApp
             } while (true);
         }
 
+        /// <summary>
+        /// Displays the board
+        /// </summary>
         private void DisplayBorad()
         {
             Console.WriteLine();
