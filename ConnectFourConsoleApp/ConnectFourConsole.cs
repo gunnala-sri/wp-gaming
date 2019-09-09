@@ -1,4 +1,13 @@
-﻿using ConnectFourService;
+﻿/*
+ * FileName: ConnectFourConsole.cs
+ * Created:  09/09/2019
+ * Author: Sri Gunnala
+ * Description: Handles user interaction through command line
+ * 
+ * UpdatedBy        Date        Comments
+ * --               --          --
+*/
+using ConnectFourService;
 using System;
 
 namespace ConnectFourConsoleApp
@@ -57,7 +66,7 @@ namespace ConnectFourConsoleApp
         }
 
         /// <summary>
-        /// Read the bord size - number of rows and columns
+        /// Read the board size - number of rows and columns
         /// </summary>
         private void ReadGameInputs()
         {
@@ -66,7 +75,6 @@ namespace ConnectFourConsoleApp
             int rowNumber;
             while (!Int32.TryParse(rowsInput, out rowNumber) || rowNumber < 4)
             {
-                //this.CheckEscKey();
                 Console.WriteLine("Please enter valid input");
                 rowsInput = Console.ReadLine();
             }
@@ -76,7 +84,6 @@ namespace ConnectFourConsoleApp
             int colNumber;
             while (!Int32.TryParse(colsInput, out colNumber) || colNumber < 4)
             {
-                //this.CheckEscKey();
                 Console.WriteLine("Please enter valid input");
                 colsInput = Console.ReadLine();
             }
@@ -86,13 +93,13 @@ namespace ConnectFourConsoleApp
         }
 
         /// <summary>
-        /// Initializes the ConnectFour service and displays intial board.
+        /// Initializes the ConnectFour service and displays initial board.
         /// </summary>
         private void InitializeGame()
         {
             this._connectFour = new ConnectFour(this._rows, this._columns);
 
-            Console.WriteLine("The boad has initialized");
+            Console.WriteLine("The board has initialized");
             this.DisplayBorad();
 
             Console.WriteLine();
@@ -126,7 +133,6 @@ namespace ConnectFourConsoleApp
 
                 // Validate the user input column number.
                 colInput = Console.ReadLine();
-                //this.CheckEscKey();
                 if (!Int32.TryParse(colInput, out int colNumber) || colNumber > this._columns)
                 {
                     Console.WriteLine("\nPlease enter valid input");
@@ -147,7 +153,7 @@ namespace ConnectFourConsoleApp
                     continue;
                 }
 
-                // drop the checkers and display the borad
+                // drop the checkers and display the board
                 this._connectFour.Drop(player, colNumber);
                 this.DisplayBorad();
 
@@ -158,7 +164,7 @@ namespace ConnectFourConsoleApp
                     return;
                 }
 
-                // if not won, check if the obard is full
+                // if not won, check if the board is full
                 if (this._connectFour.IsBoardFull())
                 {
                     Console.WriteLine("\nIt is a Draw. Please start a new game");
@@ -183,23 +189,6 @@ namespace ConnectFourConsoleApp
                 }
                 Console.WriteLine();
                 Console.WriteLine();
-            }
-            //for (int row = 0; row < this._rows; row++)
-            //{
-            //    for (int column = 0; column < this._columns; column++)
-            //    {
-            //        Console.Write(board[row, column] + "  ");
-            //    }
-            //    Console.WriteLine();
-            //    Console.WriteLine();
-            //}
-        }
-
-        private void CheckEscKey()
-        {
-            if (Console.ReadKey(true).Key == ConsoleKey.Escape)
-            {
-                Environment.Exit(0);
             }
         }
 

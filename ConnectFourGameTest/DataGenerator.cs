@@ -1,7 +1,13 @@
-﻿using ConnectFourService;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿/*
+ * FileName: DataGenerator.cs
+ * Created:  09/09/2019
+ * Author: Sri Gunnala
+ * Description: Generates mock data needed for connect four service test
+ * 
+ * UpdatedBy        Date        Comments
+ * --               --          --
+*/
+using ConnectFourService;
 
 namespace ConnectFourGameTest
 {
@@ -11,7 +17,7 @@ namespace ConnectFourGameTest
         {
             ConnectFour connectFour = new ConnectFour(rows, columns);
 
-            // Colum 0
+            // Column 0
             connectFour.Drop('y', 0);
 
             // Column 1
@@ -36,7 +42,7 @@ namespace ConnectFourGameTest
         {
             ConnectFour connectFour = new ConnectFour(6,6);
 
-            // Colum 0
+            // Column 0
             connectFour.Drop('y', 0);
             connectFour.Drop('r', 0);
             connectFour.Drop('y', 0);
@@ -70,7 +76,7 @@ namespace ConnectFourGameTest
             connectFour.Drop('r', 3);
             connectFour.Drop('y', 3);
 
-            // Colum 4
+            // Column 4
             connectFour.Drop('y', 4);
             connectFour.Drop('r', 4);
             connectFour.Drop('y', 4);
