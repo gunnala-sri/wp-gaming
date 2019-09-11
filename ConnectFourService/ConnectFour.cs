@@ -76,16 +76,22 @@ namespace ConnectFourService
         /// <returns>true if won, else false</returns>
         public bool CheckWin(char player)
         {
-            if (this.CheckHorizonalMatch(player)
-                || this.CheckVerticalMatch(player)
-                || this.CheckTopLeftToBottomRightDiagonalMatch(player)
-                || this.CheckTopRightToBottomLeftDiagonalMatch(player))
+            for (int row = 0; row < this._rowCount; row++)
             {
-                return true;
-            }
+                for (int column = 0; column < this._columnCount; column++)
+                {
+                    // if this is empty spot no check needed.
+                    if (this._board[row, column] == BoardDefalutValue)
+                        continue;
 
-            else
-                return false;
+                    if (CheckHorizonalMatch(row, column, player) ||
+                        CheckVerticalMatch(row, column, player) ||
+                        CheckTopLeftToBottomRightDiagonalMatch(row, column, player) ||
+                        CheckTopRightToBottomLeftDiagonalMatch(row, column, player))
+                        return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -177,21 +183,16 @@ namespace ConnectFourService
         /// </summary>
         /// <param name="player">Player who just had a turn</param>
         /// <returns>True if won, else false</returns>
-        private bool CheckHorizonalMatch(char player)
+        private bool CheckHorizonalMatch(int row, int column, char player)
         {
-            for (int row = 0; row < this._rowCount; row++)
-            {
-                for (int column = 0; column <= this._columnCount - 4; column++)
-                {
-                    // if this is empty spot no check needed.
-                    if (this._board[row, column] == BoardDefalutValue)
-                        continue;
+            // skip last three columns
+            if (column > this._columnCount - 4)
+                return false;
 
-                    if (this._board[row, column] == player && this._board[row, column + 1] == player
-                        && this._board[row, column + 2] == player && this._board[row, column + 3] == player)
-                        return true;
-                }
-            }
+            if (this._board[row, column] == player && this._board[row, column + 1] == player
+                && this._board[row, column + 2] == player && this._board[row, column + 3] == player)
+                return true;
+
             return false;
         }
 
@@ -200,21 +201,16 @@ namespace ConnectFourService
         /// </summary>
         /// <param name="player">Player who just had a turn</param>
         /// <returns>True if won, else false</returns>
-        private bool CheckVerticalMatch(char player)
+        private bool CheckVerticalMatch(int row, int column, char player)
         {
-            for (int row = 0; row <= this._rowCount - 4; row++)
-            {
-                for (int column = 0; column < this._columnCount; column++)
-                {
-                    // if this is empty spot no check needed.
-                    if (this._board[row, column] == BoardDefalutValue)
-                        continue;
+            // skip last three rows
+            if (row > this._rowCount - 4)
+                return false;
 
-                    if (this._board[row, column] == player && this._board[row + 1, column] == player
-                        && this._board[row + 2, column] == player && this._board[row + 3, column] == player)
-                        return true;
-                }
-            }
+            if (this._board[row, column] == player && this._board[row + 1, column] == player
+                && this._board[row + 2, column] == player && this._board[row + 3, column] == player)
+                return true;
+
             return false;
         }
 
@@ -223,23 +219,16 @@ namespace ConnectFourService
         /// </summary>
         /// <param name="player">Player who just had a turn</param>
         /// <returns>True if won, else false</returns>
-        private bool CheckTopRightToBottomLeftDiagonalMatch(char player)
+        private bool CheckTopRightToBottomLeftDiagonalMatch(int row, int column, char player)
         {
-            // row <= this._rowCount - 4; Skip bottom three rows, it won't have enough elements to match diagonally.
-            for (int row = 0; row <= this._rowCount - 4; row++)
-            {
-                // column >= 3 - skip col0, col1, and col2 as it won't have enough elements to match diagonally.
-                for (int column = this._columnCount - 1; column >= 3; column--)
-                {
-                    // if this is empty spot no check needed.
-                    if (this._board[row, column] == BoardDefalutValue)
-                        continue;
+            //skip col0, col1, col2 and last three rows
+            if (column < 3 || row > this._rowCount - 4)
+                return false;
 
-                    if (this._board[row, column] == player && this._board[row + 1, column - 1] == player
-                        && this._board[row + 2, column - 2] == player && this._board[row + 3, column - 3] == player)
-                        return true;
-                }
-            }
+            if (this._board[row, column] == player && this._board[row + 1, column - 1] == player
+                && this._board[row + 2, column - 2] == player && this._board[row + 3, column - 3] == player)
+                return true;
+
             return false;
         }
 
@@ -248,23 +237,16 @@ namespace ConnectFourService
         /// </summary>
         /// <param name="player">Player who just had a turn</param>
         /// <returns>True if won, else false</returns>
-        private bool CheckTopLeftToBottomRightDiagonalMatch(char player)
+        private bool CheckTopLeftToBottomRightDiagonalMatch(int row, int column, char player)
         {
-            // Skip bottom three rows, it won't have enough elements to match diagonally.
-            for (int row = 0; row <= this._rowCount - 4; row++)
-            {
-                // // Skip last three columns, it won't have enough elements to match diagonally.
-                for (int column = 0; column <= this._columnCount - 4; column++)
-                {
-                    // if this is empty spot no check needed.
-                    if (this._board[row, column] == BoardDefalutValue)
-                        continue;
+            // skip last three rows and last three columns
+            if (row > this._rowCount - 4 || column > this._columnCount - 4)
+                return false;
 
-                    if (this._board[row, column] == player && this._board[row + 1, column + 1] == player
-                        && this._board[row + 2, column + 2] == player && this._board[row + 3, column + 3] == player)
-                        return true;
-                }
-            }
+            if (this._board[row, column] == player && this._board[row + 1, column + 1] == player
+                && this._board[row + 2, column + 2] == player && this._board[row + 3, column + 3] == player)
+                return true;
+
             return false;
         }
 
